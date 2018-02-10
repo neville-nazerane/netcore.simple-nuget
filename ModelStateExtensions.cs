@@ -10,15 +10,18 @@ namespace NetCore.Simple
     public static class ModelStateExtensions
     {
 
-        public static IEnumerable<ErrorModel> Errors(this ModelStateDictionary ModelState)
+        public static IEnumerable<ErrorModel> Errors(this ModelStateDictionary ModelState, IEnumerable<ErrorModel> additionalErrors = null)
         {
-            return ModelState.Select(ms =>
+
+            var output = ModelState.Select(ms =>
                 new ErrorModel()
                 {
                     Key = ms.Key,
                     Errors = ms.Value.Errors.Select(e => e.ErrorMessage)
                 }
             );
+            if (additionalErrors == null) output = output.Union(additionalErrors);
+            return output;
         }
 
         //public static T GetAttributeFrom<T>(this object instance, string propertyName) where T : Attribute

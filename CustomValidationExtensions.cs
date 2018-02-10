@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NetCore.Simple.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,8 @@ namespace NetCore.Simple
     public static class CustomValidationExtensions
     {
 
-        static IActionResult ValidatedResult(this Controller Controller, object model, Func<IActionResult> Success)
+        static IActionResult ValidatedResult(this Controller Controller, object model, Func<IActionResult> Success,
+                                                                IEnumerable<ErrorModel> additionalErrors = null)
         {
             Controller.ModelState.Clear();
             Controller.TryValidateModel(model);
@@ -17,7 +19,7 @@ namespace NetCore.Simple
             {
                 return Success();
             }
-            return Controller.BadRequest(Controller.ModelState.Errors());
+            return Controller.BadRequest(Controller.ModelState.Errors(additionalErrors));
         }
 
         public static IActionResult ValidatedResult(this Controller Controller, object model, Action OnSuccess)
@@ -33,7 +35,8 @@ namespace NetCore.Simple
             => Controller.ValidatedResult(model, () => Controller.Ok());
 
 
-        public static async Task<IActionResult> ValidatedResult(this Controller Controller, object model, Func<Task<object>> OnSuccess)
+        public static async Task<IActionResult> ValidatedResult(this Controller Controller, object model, 
+                                    Func<Task<object>> OnSuccess, IEnumerable<ErrorModel> additionalErrors = null)
         {
             Controller.ModelState.Clear();
             Controller.TryValidateModel(model);
@@ -42,7 +45,7 @@ namespace NetCore.Simple
                 var obj = await OnSuccess();
                 return Controller.Ok(obj);
             }
-            return Controller.BadRequest(Controller.ModelState.Errors());
+            return Controller.BadRequest(Controller.ModelState.Errors(additionalErrors));
         }
         
 
