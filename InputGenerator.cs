@@ -38,6 +38,16 @@ namespace NetCore.Simple
         {
             
         }
+
+        public IHtmlContent Make(string customField, string Label = null, string Template = null,
+                        string DataType = null, bool? IsRequired = null)
+        => Generate(Template ?? this.Template, new InputInfo()
+        {
+            Name = customField,
+            DataType = DataType ?? "text",
+            Label = Label ?? customField,
+            IsRequired = IsRequired ?? false
+        });
         
         public IHtmlContent Make<T>(Expression<Func<TModel, T>> lamda, string Label = null, string Template = null,
                         string DataType = null, bool? IsRequired = null)
@@ -69,7 +79,7 @@ namespace NetCore.Simple
                 Name = member.Name,
                 DataType = DataType,
                 Label = Label,
-                IsRequired = (bool)IsRequired
+                IsRequired = IsRequired ?? false
             });
         }
 

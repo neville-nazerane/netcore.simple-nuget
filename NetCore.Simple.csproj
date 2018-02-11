@@ -2,14 +2,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageId>NetCore.Simple</PackageId>
-    <PackageVersion>2.6.6</PackageVersion>
+    <PackageVersion>2.6.7</PackageVersion>
     <Authors>Neville Nazerane</Authors>
     <Description>
       Simplifies usage of .net core mvc and web api application with strongly typed features and customizable templates.
     </Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>
-      - Validation extensions can accept custom error list
+      - Added Make overload for custom fields (not in model)
     </PackageReleaseNotes>
     <PackageTags>netcore mvc views Customizable Simple Easy Quick</PackageTags>
     <!--<PackageIconUrl>http://netcoresimple.azurewebsites.net/content/themes/icon.png</PackageIconUrl>-->
