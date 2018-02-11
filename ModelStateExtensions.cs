@@ -10,7 +10,8 @@ namespace NetCore.Simple
     public static class ModelStateExtensions
     {
 
-        public static IEnumerable<ErrorModel> Errors(this ModelStateDictionary ModelState, IEnumerable<ErrorModel> additionalErrors = null)
+        public static IEnumerable<ErrorModel> Errors(this ModelStateDictionary ModelState, 
+                        IEnumerable<ErrorModel> additionalErrors = null, Func<List<ErrorModel>> manualValidate = null)
         {
 
             var output = ModelState.Select(ms =>
@@ -20,7 +21,8 @@ namespace NetCore.Simple
                     Errors = ms.Value.Errors.Select(e => e.ErrorMessage)
                 }
             );
-            if (additionalErrors == null) output = output.Union(additionalErrors);
+            if (additionalErrors != null) output = output.Union(additionalErrors);
+            if (manualValidate != null) output = output.Union(manualValidate());
             return output;
         }
 
