@@ -2,14 +2,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageId>NetCore.Simple</PackageId>
-    <PackageVersion>2.6.8</PackageVersion>
+    <PackageVersion>2.6.9</PackageVersion>
     <Authors>Neville Nazerane</Authors>
     <Description>
       Simplifies usage of .net core mvc and web api application with strongly typed features and customizable templates.
     </Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>
-      - Manual validate added to all extension overloads
+      - Manual validate extensions cleaned and fixed recursion
     </PackageReleaseNotes>
     <PackageTags>netcore mvc views Customizable Simple Easy Quick</PackageTags>
     <!--<PackageIconUrl>http://netcoresimple.azurewebsites.net/content/themes/icon.png</PackageIconUrl>-->
